@@ -71,7 +71,7 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>NightLife</h1>
-                        <h3>One Night, Many Plans</h3>
+                        <h3>One Night, Infinite Plans</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
@@ -96,17 +96,46 @@
 
 	<br>
 	<a  name="search"></a>
-    <div ng-app="myApp">
-        <form name= "myform" ng-controller="myCtrl" ng-submit="send()">
+    <div id="barListWrapper" ng-app="myApp" ng-controller="myCtrl">
+        <form name= "myform"  ng-submit="send()">
             
             <input class="form-control" id="inputdefault" type="text" name="mydata" placeholder="Enter City Name" ng-model="data.textdata" ng-required="true" />
             
             <button class="btn btn-primary" ng-click="myform.$valid && preview()">Submit</button>
-            <!--<pre>{{data.textdata}}</pre> -->
-            
+            <!--<pre>{{data.textdata}}</pre>-->
         </form>
+        <br><br><br>
+        <div>
+            <ul class="list-unstyled">
+                
+                <li class="bar" ng-repeat="bar in bars" style="background: white url('{{bar.image_url}}')  no-repeat">
+
+                    <div class="bar-details clearfix">
+                        
+                        <h3>{{bar.name}}</h3>
+                        <p>Rating: {{bar.rating}}</p>
+						<p>Price Rate: {{bar.price}}</p>
+                        <ul class="list-unstyled list-inline">
+                            <li>Location : {{bar.location}}</li>
+                            <br>
+                            <li>Currently Closed(true/false) : {{bar.is_closed}}</li>
+                            <br>
+                            <li>Number Of Reviews : {{bar.review_count}}</li>
+                            <br>
+                            <li>Contact Number : {{bar.phone}}</li>
+                            <br>
+                            <li>Display Number : {{bar.display_phone}}</li>
+                            <br>
+                            <li>VISIT URL : {{bar.url}}</li>
+                            
+                        </ul>
+                    </div>
+            </ul>
+
+        </div>
+        
     </div>
-    <br>
+    <br><br><br><br>
     <!-- /.content-section-a -->
 
 	<a  name="contact"></a>

@@ -27,7 +27,8 @@ module.exports=function(app){
         
         yelp.search({term: 'bars', location: req.body.textdata})
         .then(function(data) {
-            console.log(data);
+            console.log(data.businesses);
+            res.end(JSON.stringify(data));
         })
         
         .catch(function(err){

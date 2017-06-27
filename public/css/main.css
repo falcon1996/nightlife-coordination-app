@@ -39,6 +39,27 @@ h6 {
     cursor:pointer;
     border: none;
 }
+
+#barListWrapper{
+    
+    width: 100%;
+	padding: 10px;
+}
+
+#barListWrapper .bar {
+	border: 1px solid gray;
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #1C2833;
+	color: white;
+	
+}
+
+#barListWrapper .bar .bar-details {
+	margin-left: 160px;
+}
+
+
 .fa{
     
     padding: 20px;

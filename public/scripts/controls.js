@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope,$http) {
     $scope.data = {};
-    $scope.response = {};
+    
     
     $scope.preview = function(){
         alert("Submitted!");
@@ -19,7 +19,13 @@ app.controller('myCtrl', function($scope,$http) {
             url: '/post',
             data: $scope.data,
             processData: true
-        })
-        
+        }).then(function(response){
+            
+            $scope.bars = response.data.businesses;
+            
+        }).catch(function(response){
+            $scope.bars = response.statusText;
+            console.log('Data not recieved');
+        });
     }
 });
