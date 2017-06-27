@@ -94,17 +94,19 @@
 
     <!-- Page Content -->
 
+	<br>
 	<a  name="search"></a>
     <div ng-app="myApp">
         <form name= "myform" ng-controller="myCtrl" ng-submit="send()">
             
-            City:<input type="text" name="mydata" ng-model="data.textdata" ng-required="true" />
-            <pre>{{data.textdata}}</pre>
+            <input class="form-control" id="inputdefault" type="text" name="mydata" placeholder="Enter City Name" ng-model="data.textdata" ng-required="true" />
+            
             <button class="btn btn-primary" ng-click="myform.$valid && preview()">Submit</button>
+            <!--<pre>{{data.textdata}}</pre> -->
             
         </form>
-
     </div>
+    <br>
     <!-- /.content-section-a -->
 
 	<a  name="contact"></a>
