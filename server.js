@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var path = process.cwd();
 var http = require('http');
+var Yelp = require('yelp-v3');
 
 var routes = require('./app/routes/index.js');
 

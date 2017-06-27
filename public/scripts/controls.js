@@ -5,7 +5,7 @@ app.controller('myCtrl', function($scope,$http) {
     $scope.response = {};
     
     $scope.preview = function(){
-        alert("Previewed");
+        alert("Submitted!");
     }
     
     $scope.send = function(){
