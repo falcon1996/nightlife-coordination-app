@@ -23,13 +23,63 @@ h6 {
 
 .topnav {
     font-size: 14px; 
-    background-color: #000000;
+    background-color: #1C2833;
 }
 
 .lead {
     font-size: 18px;
     font-weight: 400;
 }
+
+.btn-lg{
+    
+    outline:none;
+    background-color: Transparent;
+    color: white;
+    cursor:pointer;
+    border: none;
+}
+.fa{
+    
+    padding: 20px;
+    font-size: 50px;
+    width: 65px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 15px;
+    border-radius: 100%;
+}
+        
+.fa:hover {
+    opacity: 0.8;
+}
+        
+.pull-right{
+    color:white;
+}
+        
+.fa-yelp{
+    color:white;
+}
+        
+.fa-heart{
+    color: red;
+}
+.fa-twitter{
+    background: #55ACEE;
+    color: white;
+}
+        
+.fa-github{
+    background: #000000;
+    color: white;
+}
+        
+.fa-linkedin{
+    background: #007bb5;
+    color: white;
+}
+
 
 .intro-header {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
@@ -163,8 +213,9 @@ h6 {
 }
 
 footer {
-    padding: 50px 0;
-    background-color: #f8f8f8;
+    padding: 30px 0;
+    background-color: #1C2833;
+    margin: 2px 0px;
 }
 
 p.copyright {
