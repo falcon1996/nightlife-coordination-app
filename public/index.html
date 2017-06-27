@@ -98,9 +98,9 @@
     <div ng-app="myApp">
         <form name= "myform" ng-controller="myCtrl" ng-submit="send()">
             
-            City:<input name="mydata" ng-model="data.textdata">
+            City:<input type="text" name="mydata" ng-model="data.textdata" ng-required="true" />
             <pre>{{data.textdata}}</pre>
-            <input type="submit" ngClick="Submit">
+            <button class="btn btn-primary" ng-click="myform.$valid && preview()">Submit</button>
             
         </form>
 
@@ -169,10 +169,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://blackrockdigital.github.io/startbootstrap-landing-page/js/bootstrap.min.js"></script>
 
 </body>
 

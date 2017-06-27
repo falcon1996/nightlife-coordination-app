@@ -4,6 +4,10 @@ app.controller('myCtrl', function($scope,$http) {
     $scope.data = {};
     $scope.response = {};
     
+    $scope.preview = function(){
+        alert("Previewed");
+    }
+    
     $scope.send = function(){
         
         console.log("inside click");
