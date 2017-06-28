@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var Local = new Schema({
     
     ip: String,
-    name: String
+    barid: String,
+    going: Boolean
 });
 
 module.exports = mongoose.model('Local', Local);

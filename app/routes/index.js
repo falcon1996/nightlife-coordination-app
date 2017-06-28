@@ -33,6 +33,7 @@ module.exports=function(app){
         
         .catch(function(err){
             console.log('Error!');
+            res.end(err);
         });
     });
     

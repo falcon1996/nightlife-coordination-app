@@ -23,8 +23,8 @@ app.controller('myCtrl', function($scope,$http) {
             
             $scope.bars = response.data.businesses;
             
-        }).catch(function(response){
-            $scope.bars = response.statusText;
+        }).catch(function(err){
+            $scope.bars = err.statusText;
             console.log('Data not recieved');
         });
     }

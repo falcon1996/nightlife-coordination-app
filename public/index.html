@@ -105,16 +105,17 @@
             <!--<pre>{{data.textdata}}</pre>-->
         </form>
         <br><br><br>
-        <div>
+        <div id="aa">
             <ul class="list-unstyled">
                 
                 <li class="bar" ng-repeat="bar in bars">
+                    
+                    <a href='{{bar.url}}'> 
+                        <img alt="img" class="img-responsive" src="{{bar.image_url}}" width="220"/>
+                    </a>
 
                     <div class="bar-details clearfix">
                         
-                        <a href='{{bar.url}}'> 
-                            <img alt="img" class="img-responsive" src="{{bar.image_url}}" width="300"/>
-                        </a>
                         <h3>{{bar.name}}</h3>
                         <p>Rating: {{bar.rating}}</p>
 						<p>Price Rate: {{bar.price}}</p>
@@ -132,6 +133,9 @@
                             <li>Display Number : {{bar.display_phone}}</li>
                             <br>
                             <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
+                            <br><br>
+                            <button class="btn btn-primary" ng-click="#">View In Map</button>
+                            <button class="btn btn-primary" ng-click="#">Going</button>
                             
                         </ul>
                     </div>
@@ -139,6 +143,19 @@
             </ul>
 
         </div>
+        
+        <div id="map" style="width:100%;height:300px"></div>
+        <script>
+            function myMap() {
+              var myCenter = new google.maps.LatLng(52.5043964983141,13.3835382277966);
+              var mapCanvas = document.getElementById("map");
+              var mapOptions = {center: myCenter, zoom: 17};
+              var map = new google.maps.Map(mapCanvas, mapOptions);
+              var marker = new google.maps.Marker({position:myCenter, animation:google.maps.Animation.BOUNCE});
+              marker.setMap(map);
+            }
+        </script>
+        
         
     </div>
     <br><br><br><br>
@@ -206,10 +223,13 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://blackrockdigital.github.io/startbootstrap-landing-page/js/bootstrap.min.js"></script>
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap"></script>
 
 </body>
 

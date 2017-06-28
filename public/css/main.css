@@ -54,18 +54,26 @@ h6 {
 	background-color: #1C2833;
 	color: white;
 	
+    width: max-width;
+    height: 400px;
+    
+    text-align: left;
 }
 
+#aa img {
+  float: right;
+}
+/*
 #barListWrapper .bar:hover{
     
     width: max-width;
     height: 800px;
     margin-top: -18px;
-    -webkit-box-shadow: 0 0 50px blue;
+    -webkit-box-shadow: 0 0 50px blue; 
     box-shadow:         0 0 50px blue;
     z-index: 10;
 }
-
+*/
 
 #barListWrapper .bar .bar-details {
 	margin-left: 20px;
