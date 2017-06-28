@@ -108,15 +108,20 @@
         <div>
             <ul class="list-unstyled">
                 
-                <li class="bar" ng-repeat="bar in bars" style="background: white url('{{bar.image_url}}')  no-repeat">
+                <li class="bar" ng-repeat="bar in bars">
 
                     <div class="bar-details clearfix">
                         
+                        <a href='{{bar.url}}'> 
+                            <img alt="img" class="img-responsive" src="{{bar.image_url}}" width="300"/>
+                        </a>
                         <h3>{{bar.name}}</h3>
                         <p>Rating: {{bar.rating}}</p>
 						<p>Price Rate: {{bar.price}}</p>
                         <ul class="list-unstyled list-inline">
-                            <li>Location : {{bar.location}}</li>
+                            <li>Address : {{bar.location.display_address}}</li>
+                            <br>
+                            <li>Category: {{bar.categories[0].title}}</li>
                             <br>
                             <li>Currently Closed(true/false) : {{bar.is_closed}}</li>
                             <br>
@@ -126,10 +131,11 @@
                             <br>
                             <li>Display Number : {{bar.display_phone}}</li>
                             <br>
-                            <li>VISIT URL : {{bar.url}}</li>
+                            <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
                             
                         </ul>
                     </div>
+                </li>
             </ul>
 
         </div>

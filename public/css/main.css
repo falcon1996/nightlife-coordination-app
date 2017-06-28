@@ -43,7 +43,8 @@ h6 {
 #barListWrapper{
     
     width: 100%;
-	padding: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 #barListWrapper .bar {
@@ -55,8 +56,19 @@ h6 {
 	
 }
 
+#barListWrapper .bar:hover{
+    
+    width: max-width;
+    height: 800px;
+    margin-top: -18px;
+    -webkit-box-shadow: 0 0 50px blue;
+    box-shadow:         0 0 50px blue;
+    z-index: 10;
+}
+
+
 #barListWrapper .bar .bar-details {
-	margin-left: 160px;
+	margin-left: 20px;
 }
 
 
