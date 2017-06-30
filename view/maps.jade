@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title NightLife
+    // Bootstrap Core CSS
+    link(href='https://blackrockdigital.github.io/startbootstrap-landing-page/css/bootstrap.min.css', rel='stylesheet')
+    // Custom CSS
+    link(rel='stylesheet', type='text/css', href='./css/main.css')
+    // Custom Fonts
+    link(href='https://blackrockdigital.github.io/startbootstrap-landing-page/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js')
+  body
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
+      .container.topnav
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.topnav(href='#') NightLife
+        // Collect the nav links, forms, and other content for toggling
+      // /.container
+      
+    br
+    br
+    br
+    br
+    div
+    #{pos.latitude}
+    #{pos.longitude}
+      #map
+      script.
+        var x = #{pos.latitude}
+        var y = #{pos.longitude}
+        function myMap() {
+        var mapCanvas = document.getElementById("map");
+        var myCenter = new google.maps.LatLng(x,y);
+        var mapCanvas = document.getElementById("map");
+        var mapOptions = {center: myCenter, zoom: 20};
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({position:myCenter, animation:google.maps.Animation.BOUNCE});
+        marker.setMap(map);
+        }
+    br
+    br
+    br
+    br
+    footer
+      .container
+        .pull-right
+          | Powered By  : 
+          i.fa.fa-yelp.fa-4x(aria-hidden='true')
+    // Footer
+    // jQuery
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(type='text/javascript', src='/app/routes/index.js', defer='', async='')
+    // Google Maps API
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCFPnCujGqlAvjzoHP8svSjv1cDhQH7MJw&callback=myMap')
+    // Bootstrap Core JavaScript
+    script(src='https://blackrockdigital.github.io/startbootstrap-landing-page/js/bootstrap.min.js')

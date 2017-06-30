@@ -27,7 +27,7 @@
     
 </head>
 
-<body>
+<body ng-app="myApp">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -96,7 +96,7 @@
 
 	<br>
 	<a  name="search"></a>
-    <div id="barListWrapper" ng-app="myApp" ng-controller="myCtrl">
+    <div id="barListWrapper" ng-controller="myCtrl">
         <form name= "myform"  ng-submit="send()">
             
             <input class="form-control" id="inputdefault" type="text" name="mydata" placeholder="Enter City Name" ng-model="data.textdata" ng-required="true" />
@@ -111,7 +111,7 @@
                 <li class="bar" ng-repeat="bar in bars">
                     
                     <a href='{{bar.url}}'> 
-                        <img alt="img" class="img-responsive" src="{{bar.image_url}}" width="220"/>
+                        <img alt="img" class="img-responsive" src="{{bar.image_url}}" width="200"/>
                     </a>
 
                     <div class="bar-details clearfix">
@@ -134,8 +134,9 @@
                             <br>
                             <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
                             <br><br>
-                            <button class="btn btn-primary" ng-click="#">View In Map</button>
-                            <button class="btn btn-primary" ng-click="#">Going</button>
+                            <a href="/getmap?q={{bar.coordinates.latitude}}&l={{bar.coordinates.longitude}}" class="btn btn-primary" role="button">Visit Map</a>
+                            <a href="#" class="btn btn-primary" role="button">Going</a>
+
                             
                         </ul>
                     </div>
@@ -143,18 +144,6 @@
             </ul>
 
         </div>
-        
-        <div id="map" style="width:100%;height:300px"></div>
-        <script>
-            function myMap() {
-              var myCenter = new google.maps.LatLng(52.5043964983141,13.3835382277966);
-              var mapCanvas = document.getElementById("map");
-              var mapOptions = {center: myCenter, zoom: 17};
-              var map = new google.maps.Map(mapCanvas, mapOptions);
-              var marker = new google.maps.Marker({position:myCenter, animation:google.maps.Animation.BOUNCE});
-              marker.setMap(map);
-            }
-        </script>
         
         
     </div>
@@ -223,13 +212,13 @@
     </footer>
 
     <!-- jQuery -->
-   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://blackrockdigital.github.io/startbootstrap-landing-page/js/bootstrap.min.js"></script>
     
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFPnCujGqlAvjzoHP8svSjv1cDhQH7MJw&callback=myMap"></script>
 
 </body>
 

@@ -4,7 +4,7 @@ var express = require('express');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
-//require('angular');
+var jade = require('jade');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var path = process.cwd();

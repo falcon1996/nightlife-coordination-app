@@ -10,7 +10,7 @@ require('dotenv').load();
 
 module.exports=function(app){
     
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
     
     app.get('/', function(req,res){
         res.render('index.html');
@@ -37,4 +37,36 @@ module.exports=function(app){
         });
     });
     
+    
+    app.route('/getmap')
+        .get(function(req, res){
+        
+            var latitude = req.query.q ;
+            var longitude = req.query.l;
+            
+            console.log(latitude);
+            console.log(typeof latitude);
+            console.log(longitude);
+            console.log(typeof longitude);
+            
+            var data = {'latitude':latitude, 'longitude':longitude}
+            
+            //res.sendFile(path+ '/public/map.html');    
+            res.render("../view/maps.jade", {pos:data});
+            
+        });
+    
+}
+
+function myMap() {
+    
+    var mapCanvas = document.getElementById("map");
+    var mapOptions = {
+        
+        center : new google.maps.LatLng(51.508742,-0.120850), 
+        zoom: 5,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    }
+    
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 }
