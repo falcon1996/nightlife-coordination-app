@@ -2,6 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope,$http) {
     $scope.data = {};
+    $scope.gym = 'Not going';
     
     $scope.preview = function(){
         alert("Submitted!");
@@ -27,4 +28,22 @@ app.controller('myCtrl', function($scope,$http) {
             console.log('Data not recieved');
         });
     }
+    
+    $scope.save = function(){
+        
+        console.log('Decision Taken!');
+        
+        var change = $http({
+            
+            method: 'GET',
+            url: '/get',
+            processData: true
+        }).then(function(response){
+            
+            $scope.gym = response.data.mystatus;
+            
+        });
+    }
+    
+    
 });

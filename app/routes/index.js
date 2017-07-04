@@ -2,7 +2,8 @@
 
 var bodyParser = require('body-parser');
 var path = process.cwd();
-var user = require('../models/locate.js');
+var user = require('../models/users.js');
+var status = require('../models/status.js');
 var http = require('http');
 var Yelp = require('yelp-v3');
 
@@ -36,6 +37,12 @@ module.exports=function(app){
             res.end(err);
         });
     });
+    
+    app.get('/get', function(req, res){
+        
+        var data = {mystatus: 'Going'}
+        res.end(JSON.stringify(data));
+    })
     
     
     app.route('/getmap')

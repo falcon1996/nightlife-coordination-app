@@ -16,7 +16,7 @@ html(lang='en')
     // Custom Fonts
     link(href='https://blackrockdigital.github.io/startbootstrap-landing-page/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js')
-  body
+  body(background='http://www.flairla.com/wp-content/uploads/2012/07/slide3.jpg')
     // Navigation
     nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
       .container.topnav
@@ -27,7 +27,7 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand.topnav(href='#') NightLife
+          a.navbar-brand.topnav(href='/') NightLife
         // Collect the nav links, forms, and other content for toggling
       // /.container
       
@@ -35,10 +35,10 @@ html(lang='en')
     br
     br
     br
+    br
     div
-    #{pos.latitude}
-    #{pos.longitude}
-      #map
+    
+      #map(style='width:100%;height:400px')
       script.
         var x = #{pos.latitude}
         var y = #{pos.longitude}

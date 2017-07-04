@@ -1,7 +1,6 @@
 'use strict';
 
 var express = require('express');
-var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var jade = require('jade');
@@ -10,6 +9,8 @@ var cors = require('cors');
 var path = process.cwd();
 var http = require('http');
 var Yelp = require('yelp-v3');
+//var cookieParser = require('cookie-parser');
+//var session = require('express-session');
 
 var routes = require('./app/routes/index.js');
 

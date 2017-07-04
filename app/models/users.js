@@ -3,11 +3,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Local = new Schema({
+var Users = new Schema({
     
     ip: String,
     barid: String,
     going: Boolean
 });
 
-module.exports = mongoose.model('Local', Local);
+module.exports = mongoose.model('Users', Users);

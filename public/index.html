@@ -111,7 +111,7 @@
                 <li class="bar" ng-repeat="bar in bars">
                     
                     <a href='{{bar.url}}'> 
-                        <img alt="img" class="img-responsive" src="{{bar.image_url}}" width="200"/>
+                        <img src="{{bar.image_url}}" class="img-rounded" alt="Cinque Terre" width="250" height="160"> 
                     </a>
 
                     <div class="bar-details clearfix">
@@ -135,7 +135,8 @@
                             <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
                             <br><br>
                             <a href="/getmap?q={{bar.coordinates.latitude}}&l={{bar.coordinates.longitude}}" class="btn btn-primary" role="button">Visit Map</a>
-                            <a href="#" class="btn btn-primary" role="button">Going</a>
+                           
+                            <a href="#" class="btn btn-primary" role="button" ng-click="save()">{{gym}}</a>
 
                             
                         </ul>
