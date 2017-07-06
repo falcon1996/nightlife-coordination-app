@@ -124,19 +124,21 @@
                             <br>
                             <li>Category: {{bar.categories[0].title}}</li>
                             <br>
-                            <li>Currently Closed(true/false) : {{bar.is_closed}}</li>
-                            <br>
                             <li>Number Of Reviews : {{bar.review_count}}</li>
                             <br>
                             <li>Contact Number : {{bar.phone}}</li>
                             <br>
-                            <li>Display Number : {{bar.display_phone}}</li>
-                            <br>
                             <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
                             <br><br>
-                            <a href="/getmap?q={{bar.coordinates.latitude}}&l={{bar.coordinates.longitude}}" class="btn btn-primary" role="button">Visit Map</a>
+                            <a href="/getmap?q={{bar.coordinates.latitude}}&l={{bar.coordinates.longitude}}" target="_blank" class="btn btn-primary" role="button">Visit Map</a>
                            
-                            <a href="#" class="btn btn-primary" role="button" ng-click="save()">{{gym}}</a>
+                            <!--<a href="#" class="btn btn-primary" role="button" ng-click="save($index);">RSVP</a> -->
+                            
+                            <button ng-click='rsvp($index)' ng-disabled='bar.rsvping' class="btn btn-primary">RSVP<span ng-if="bar.rsvping">ed!</span></button>
+                            
+                            <button ng-click='cancel($index)' ng-show='bar.show' class="btn btn-danger">Cancel</button>
+                            
+                            
 
                             
                         </ul>
@@ -163,13 +165,13 @@
                 <div class="col-lg-6">
                     <ul class="list-inline banner-social">
                         <li>
-                            <a href="https://twitter.com/DhruvParashar8" class="fa fa-twitter fa-2x"></a>
+                            <a href="https://twitter.com/DhruvParashar8" target="_blank" class="fa fa-twitter fa-2x"></a>
                         </li>
                         <li>
-                            <a href="https://github.com/falcon1996/nightlife-coordination-app" class="fa fa-github fa-2x"></a>
+                            <a href="https://github.com/falcon1996/nightlife-coordination-app" target="_blank" class="fa fa-github fa-2x"></a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/dhruv-parashar-494aa2138/" class="fa fa-linkedin fa-2x"></a>
+                            <a href="https://www.linkedin.com/in/dhruv-parashar-494aa2138/" target="_blank" class="fa fa-linkedin fa-2x"></a>
                         </li>
                     </ul>
                 </div>

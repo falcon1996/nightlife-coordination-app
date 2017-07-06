@@ -4,6 +4,8 @@ app.controller('myCtrl', function($scope,$http) {
     $scope.data = {};
     $scope.gym = 'Not going';
     
+    
+    
     $scope.preview = function(){
         alert("Submitted!");
     }
@@ -29,9 +31,10 @@ app.controller('myCtrl', function($scope,$http) {
         });
     }
     
-    $scope.save = function(){
+   /* $scope.save = function(bar){
         
         console.log('Decision Taken!');
+        alert("Task Id is "+bar.id);
         
         var change = $http({
             
@@ -40,10 +43,36 @@ app.controller('myCtrl', function($scope,$http) {
             processData: true
         }).then(function(response){
             
-            $scope.gym = response.data.mystatus;
+            $scope.gym = bar.phone;
             
         });
+    }*/
+    
+    $scope.rsvp = function(index){
+        
+        $scope.bars[index].rsvping = true;
+        $scope.bars[index].show = true;
+        
+        
+        alert("Task Id is "+$scope.bars[index].id);
+        
+        var change = $http({
+            
+            method: 'GET',
+            url: '/get',
+            processData: true
+        }).then(function(response){
+            
+            $scope.gym = $scope.bars[index].phone;
+            
+        });
+        
     }
     
+    $scope.cancel = function(index){
+        
+        $scope.bars[index].rsvping = false;
+        $scope.bars[index].show = false;
+    }
     
 });
