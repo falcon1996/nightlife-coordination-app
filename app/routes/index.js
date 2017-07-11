@@ -3,7 +3,6 @@
 var bodyParser = require('body-parser');
 var path = process.cwd();
 var user = require('../models/users.js');
-var status = require('../models/status.js');
 var http = require('http');
 var Yelp = require('yelp-v3');
 
@@ -38,9 +37,37 @@ module.exports=function(app){
         });
     });
     
-    app.get('/get', function(req, res){
+    app.get('/mypost', function(req, res){
         
-        var data = {mystatus: 'Going'}
+        var barcount;
+        
+        user.find({barid: req.body.mybar}, function(err, docs){
+            
+            console.log(docs);
+            barcount = docs.length;
+        });
+        
+        
+        user.find( { $and:[{ip: req.params.myip}, {barid: req.body.mybar}] }, function(err, docs){
+            
+            if(err) console.log('Error!');
+            
+            else if(docs.length == 0){
+                
+                new user({
+                    
+                    ip : req.headers['x-forwarded-for'],
+                    barid: req.body.mybar,
+                    going: true,
+                    count: 1 + barcount
+                    
+                });
+            }
+            
+        });
+        
+        
+        var data = {mystatus: barcount+1}
         res.end(JSON.stringify(data));
     })
     

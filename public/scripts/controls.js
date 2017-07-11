@@ -1,13 +1,12 @@
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngStorage']);
 
-app.controller('myCtrl', function($scope,$http) {
+app.controller('myCtrl', function($scope,$http,$sessionStorage,$window) {
     $scope.data = {};
     $scope.gym = 'Not going';
     
-    
-    
     $scope.preview = function(){
         alert("Submitted!");
+        
     }
     
     $scope.send = function(){
@@ -25,41 +24,29 @@ app.controller('myCtrl', function($scope,$http) {
             
             $scope.bars = response.data.businesses;
             
+            $window.sessionStorage['storage'] = angular.toJson(response);
+            location.reload();
+            //$scope.VarName = angular.fromJson(accessData);
+            
+            
         }).catch(function(err){
             $scope.bars = err.statusText;
             console.log('Data not recieved');
         });
     }
     
-   /* $scope.save = function(bar){
-        
-        console.log('Decision Taken!');
-        alert("Task Id is "+bar.id);
-        
-        var change = $http({
-            
-            method: 'GET',
-            url: '/get',
-            processData: true
-        }).then(function(response){
-            
-            $scope.gym = bar.phone;
-            
-        });
-    }*/
-    
     $scope.rsvp = function(index){
         
-        $scope.bars[index].rsvping = true;
-        $scope.bars[index].show = true;
+        $scope.VarName.data.businesses[index].rsvping = true;
+        $scope.VarName.data.businesses[index].show = true;
         
         
         alert("Task Id is "+$scope.bars[index].id);
         
         var change = $http({
             
-            method: 'GET',
-            url: '/get',
+            method: 'POST',
+            url: '/mypost',
             processData: true
         }).then(function(response){
             
@@ -71,8 +58,12 @@ app.controller('myCtrl', function($scope,$http) {
     
     $scope.cancel = function(index){
         
-        $scope.bars[index].rsvping = false;
-        $scope.bars[index].show = false;
+        $scope.VarName.data.businesses[index].rsvping = false;
+        $scope.VarName.data.businesses[index].show = false;
     }
+    
+    
+    
+    $scope.VarName = angular.fromJson($window.sessionStorage['storage']);
     
 });

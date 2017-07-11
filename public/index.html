@@ -23,7 +23,9 @@
     <!-- Custom Fonts -->
     <link href="https://blackrockdigital.github.io/startbootstrap-landing-page/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
     <script type="text/javascript" src="./scripts/controls.js"></script>
+    
     
 </head>
 
@@ -96,6 +98,7 @@
 
 	<br>
 	<a  name="search"></a>
+	
     <div id="barListWrapper" ng-controller="myCtrl">
         <form name= "myform"  ng-submit="send()">
             
@@ -107,8 +110,7 @@
         <br><br><br>
         <div id="aa">
             <ul class="list-unstyled">
-                
-                <li class="bar" ng-repeat="bar in bars">
+                <li class="bar"  ng-repeat="bar in VarName.data.businesses">
                     
                     <a href='{{bar.url}}'> 
                         <img src="{{bar.image_url}}" class="img-rounded" alt="Cinque Terre" width="250" height="160"> 
@@ -129,17 +131,17 @@
                             <li>Contact Number : {{bar.phone}}</li>
                             <br>
                             <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
+                            <br>
+                            <li>
+                               / counter: {{VarName.data.businesses[0].id}}
+                            </li>
                             <br><br>
                             <a href="/getmap?q={{bar.coordinates.latitude}}&l={{bar.coordinates.longitude}}" target="_blank" class="btn btn-primary" role="button">Visit Map</a>
                            
-                            <!--<a href="#" class="btn btn-primary" role="button" ng-click="save($index);">RSVP</a> -->
                             
                             <button ng-click='rsvp($index)' ng-disabled='bar.rsvping' class="btn btn-primary">RSVP<span ng-if="bar.rsvping">ed!</span></button>
                             
                             <button ng-click='cancel($index)' ng-show='bar.show' class="btn btn-danger">Cancel</button>
-                            
-                            
-
                             
                         </ul>
                     </div>
