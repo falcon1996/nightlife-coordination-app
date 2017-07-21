@@ -41,16 +41,22 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window) {
         $scope.VarName.data.businesses[index].show = true;
         
         
-        alert("Task Id is "+$scope.bars[index].id);
+        alert("Task Id is "+$scope.VarName.data.businesses[index].id);
+        
+        //$window.location.href = '/auth/twitter';
         
         var change = $http({
             
-            method: 'POST',
+            method: 'GET',
             url: '/mypost',
             processData: true
         }).then(function(response){
             
-            $scope.gym = $scope.bars[index].phone;
+            //$scope.gym = $scope.bars[index].phone;
+        
+            $window.location.href = response.data.site;
+            //alert(response.data.site)
+            
             
         });
         

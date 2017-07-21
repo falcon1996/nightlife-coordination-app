@@ -68,17 +68,18 @@ h6 {
 #aa img {
   float: right;
 }
-/*
-#barListWrapper .bar:hover{
-    
-    width: max-width;
-    height: 800px;
-    margin-top: -18px;
-    -webkit-box-shadow: 0 0 50px blue; 
-    box-shadow:         0 0 50px blue;
-    z-index: 10;
+
+#inputdefault{
+    width:330px !important;
+    display:inline-block;
+    text-align:center;
 }
-*/
+
+#searchbox{
+    text-align:center;
+}
+
+
 
 #barListWrapper .bar .bar-details {
 	margin-left: 20px;
@@ -132,7 +133,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(https://s-media-cache-ak0.pinimg.com/originals/6b/3e/62/6b3e6262b16eb83b2abdeb2fcf63290f.jpg) no-repeat center center;
+    background: url(http://www.bookeventz.com/blog/wp-content/uploads/2013/06/barsclub.jpg) no-repeat center center;
     background-size: cover;
 }
 

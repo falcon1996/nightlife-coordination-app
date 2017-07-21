@@ -2,13 +2,13 @@
 
 var bodyParser = require('body-parser');
 var path = process.cwd();
-var user = require('../models/users.js');
+//var user = require('../models/users.js');
 var http = require('http');
 var Yelp = require('yelp-v3');
 
 require('dotenv').load();
 
-module.exports=function(app){
+module.exports=function(app, passport){
     
     app.use(bodyParser.json());
     
@@ -19,7 +19,6 @@ module.exports=function(app){
     app.post('/post', function(req,res){
         
         console.log('success');
-        console.log(req.body.textdata);
         
         var yelp = new Yelp({
             access_token: process.env.YELP_TOKEN,
@@ -27,7 +26,7 @@ module.exports=function(app){
         
         yelp.search({term: 'bars', location: req.body.textdata})
         .then(function(data) {
-            console.log(data.businesses);
+            //console.log(data.businesses);
             res.end(JSON.stringify(data));
         })
         
@@ -39,7 +38,12 @@ module.exports=function(app){
     
     app.get('/mypost', function(req, res){
         
-        var barcount;
+        var data = {'site' : 'auth/twitter'};
+        console.log('Yeah!!');
+        res.end(JSON.stringify(data));
+        
+        
+        /*var barcount;
         
         user.find({barid: req.body.mybar}, function(err, docs){
             
@@ -68,7 +72,7 @@ module.exports=function(app){
         
         
         var data = {mystatus: barcount+1}
-        res.end(JSON.stringify(data));
+        res.end(JSON.stringify(data));*/
     })
     
     
@@ -89,8 +93,28 @@ module.exports=function(app){
             res.render("../view/maps.jade", {pos:data});
             
         });
+        
+        
+        
+        app.get('/auth/twitter', passport.authenticate('twitter'));
+        
+        app.get('/auth/twitter/callback',
+            passport.authenticate('twitter', {
+                successRedirect : '/',
+                failureRedirect : '/'
+            }));
     
 }
+
+
+function isLoggedIn(req, res, next) {
+
+    if (req.isAuthenticated())
+        return next();
+
+    res.redirect('/');
+}
+
 
 function myMap() {
     

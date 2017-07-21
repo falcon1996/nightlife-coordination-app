@@ -13,6 +13,8 @@
     <meta name="author" content="">
 
     <title>NightLife</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" sizes="16x16">
 
     <!-- Bootstrap Core CSS -->
     <link href="https://blackrockdigital.github.io/startbootstrap-landing-page/css/bootstrap.min.css" rel="stylesheet">
@@ -44,9 +46,17 @@
                 </button>
                 <a class="navbar-brand topnav" href="#">NightLife</a>
             </div>
+            
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <button ng-show=true class="btn btn-success">Login</button>
+                    </li>
+                    <li>
+                        <button ng-show=false class="btn btn-danger">Logout</button>
+                    </li>
                     <li>
                         <a href="#about">About</a>
                     </li>
@@ -73,14 +83,15 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>NightLife</h1>
-                        <h3>One Night, Infinite Plans</h3>
+                        <h3>One Night, Many Plans</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-lg"></i> <span class="network-name">Twitter</span></a>
+                                <h4>See which bars are hoppin' tonight and RSVP ahead of time!</h4>
                             </li>
+                            <br>
                             <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-github fa-lg"></i> <span class="network-name">Github</span></a>
+                                Remember: Take a cab and drink responsibly.
                             </li>
                         
                         </ul>
@@ -100,13 +111,15 @@
 	<a  name="search"></a>
 	
     <div id="barListWrapper" ng-controller="myCtrl">
-        <form name= "myform"  ng-submit="send()">
-            
-            <input class="form-control" id="inputdefault" type="text" name="mydata" placeholder="Enter City Name" ng-model="data.textdata" ng-required="true" />
-            
-            <button class="btn btn-primary" ng-click="myform.$valid && preview()">Submit</button>
-            <!--<pre>{{data.textdata}}</pre>-->
-        </form>
+        <div id = "searchbox">
+            <form name= "myform"  ng-submit="send()">
+                
+                <input class="form-control" id="inputdefault" type="text" name="mydata" placeholder="Enter City Name" ng-model="data.textdata" ng-required="true" />
+                
+                <button class="btn btn-primary" ng-click="myform.$valid && preview()">Submit</button>
+                <!--<pre>{{data.textdata}}</pre>-->
+            </form>
+        </div>
         <br><br><br>
         <div id="aa">
             <ul class="list-unstyled">
@@ -131,10 +144,6 @@
                             <li>Contact Number : {{bar.phone}}</li>
                             <br>
                             <li>VISIT URL : <a href='{{bar.url}}'>{{bar.name}}</a></li>
-                            <br>
-                            <li>
-                               / counter: {{VarName.data.businesses[0].id}}
-                            </li>
                             <br><br>
                             <a href="/getmap?q={{bar.coordinates.latitude}}&l={{bar.coordinates.longitude}}" target="_blank" class="btn btn-primary" role="button">Visit Map</a>
                            
