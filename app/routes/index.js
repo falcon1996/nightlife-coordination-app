@@ -3,6 +3,7 @@
 var bodyParser = require('body-parser');
 var path = process.cwd();
 //var user = require('../models/users.js');
+var list = require('../models/rsvplist.js');
 var http = require('http');
 var Yelp = require('yelp-v3');
 
@@ -14,6 +15,11 @@ module.exports=function(app, passport){
     
     app.get('/', function(req,res){
         res.render('index.html');
+    });
+    
+    app.get('/logout', function(req,res){
+        req.logout();
+        res.redirect('/')
     });
     
     app.post('/post', function(req,res){
@@ -36,43 +42,60 @@ module.exports=function(app, passport){
         });
     });
     
-    app.get('/mypost', function(req, res){
+    
+    app.post('/getlist', function(req,res){
         
-        var data = {'site' : 'auth/twitter'};
-        console.log('Yeah!!');
-        res.end(JSON.stringify(data));
+       console.log('/getlist recieved');
+       
+       
+    });
+    
+    app.post('/mypost',function(req, res){
         
-        
-        /*var barcount;
-        
-        user.find({barid: req.body.mybar}, function(err, docs){
+        if(req.user != undefined){
             
-            console.log(docs);
-            barcount = docs.length;
-        });
-        
-        
-        user.find( { $and:[{ip: req.params.myip}, {barid: req.body.mybar}] }, function(err, docs){
+            console.log('Harry Potter!')
             
-            if(err) console.log('Error!');
-            
-            else if(docs.length == 0){
                 
-                new user({
-                    
-                    ip : req.headers['x-forwarded-for'],
-                    barid: req.body.mybar,
-                    going: true,
-                    count: 1 + barcount
-                    
-                });
-            }
+            /*var barcount;
             
-        });
+            user.find({barid: req.body.mybar}, function(err, docs){
+                
+                console.log(docs);
+                barcount = docs.length;
+            });
+            
+            
+            user.find( { $and:[{ip: req.params.myip}, {barid: req.body.mybar}] }, function(err, docs){
+                
+                if(err) console.log('Error!');
+                
+                else if(docs.length == 0){
+                    
+                    new user({
+                        ip : req.headers['x-forwarded-for'],
+                        barid: req.body.mybar,
+                        going: true,
+                        count: 1 + barcount
+                        
+                    });
+                }
+                
+            });
+            
+            var data = {mystatus: barcount+1}
+            res.end(JSON.stringify(data));*/
+        }
         
+        else{
+            
+            console.log(req.user)
+            //var receiveData = req.body.test
+            var data = {'site' : 'auth/twitter'};
+            console.log('Yeah!!');
+            res.end(JSON.stringify(data));
+        }
         
-        var data = {mystatus: barcount+1}
-        res.end(JSON.stringify(data));*/
     })
     
     
@@ -96,23 +119,27 @@ module.exports=function(app, passport){
         
         
         
-        app.get('/auth/twitter', passport.authenticate('twitter'));
+        app.get('/auth/github', passport.authenticate('github'));
         
-        app.get('/auth/twitter/callback',
-            passport.authenticate('twitter', {
-                successRedirect : '/',
-                failureRedirect : '/'
-            }));
+        app.get('/auth/github/callback',
+            passport.authenticate('github', { failureRedirect : '/' , failureFlash: 'bad login', successFlash: 'Welcome!'}),
+            function(req,res){
+                res.redirect('/');
+            });
     
 }
 
 
-function isLoggedIn(req, res, next) {
 
-    if (req.isAuthenticated())
+function checkAuthentication(req, res, next) {
+
+    if (req.isAuthenticated()){
         return next();
-
-    res.redirect('/');
+    }
+        
+    else{
+        res.redirect('/');
+    }
 }
 
 

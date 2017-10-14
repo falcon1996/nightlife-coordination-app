@@ -3,6 +3,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var GithubStrategy = require('passport-github').Strategy
 var flash = require('connect-flash');
 var jade = require('jade');
 var bodyParser = require('body-parser');
@@ -26,7 +27,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-app.use(session({secret: "customsessionsecret"}));
+app.use(session({secret: "customsessionsecret", resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

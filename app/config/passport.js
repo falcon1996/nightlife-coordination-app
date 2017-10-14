@@ -1,58 +1,53 @@
 var User  = require('../models/users.js');
+var List  = require('../models/rsvplist.js');
+
 var configAuth = require('./auth');
 
-var TwitterStrategy = require('passport-twitter').Strategy;
+var GithubStrategy = require('passport-github').Strategy
 
 module.exports = function(passport){
     
     passport.serializeUser(function(user,done){
         
-        done(null, user.id);
+        done(null, user);
     });
     
     passport.deserializeUser(function(id,done){
         
-        User.findById(id, function(err, user){
-            done(err, user);
+        User.findById(function(user, done){
+            done(null, user);
         });
     });
     
     
-    passport.use(new TwitterStrategy({
-        
-        consumerKey: configAuth.twitterAuth.consumerKey,
-        consumerSecret: configAuth.twitterAuth.consumerSecret,
-        callbackURL: configAuth.twitterAuth.callbackURL
+    passport.use(new GithubStrategy({
+        clientID: configAuth.githubAuth.clientID,
+        clientSecret: configAuth.githubAuth.clientSecret,
+        callbackURL: configAuth.githubAuth.callbackURL
     },
-    function(token, tokenSecret, profile, done){
-        
-        process.nextTick(function(){
+    function(accessToken, refreshToken, profile, done) {
             
-            User.findOne({ 'id' : profile.id }, function(err, user){
+        console.log(profile.username);
+        
+        List.find({ username: profile.username}, function(err, docs){
+            
+            
+            
+            if(docs.length) console.log('Welcome'+ profile.username);
+            
+            else if(!docs.length){
                 
-                if(err) return done(err);
-                
-                if(user) return done(null, user)
-                
-                else{
+                new List({
                     
-                    var newUser = new User();
+                    username : profile.username,
+                    //mylist : [0]
                     
-                    newUser.id          = profile.id;
-                    newUser.token       = token;
-                    newUser.username    = profile.username;
-                    newUser.displayName = profile.displayName;
-                    
-                    newUser.save(function(err){
-                        
-                        if(err) throw err;
-                        
-                        else return done(null, newUser);
-                    })
-                }
-            })
-        })
-    }))
-    
-    
+                })
+            }
+        });
+        
+        return done(null, profile);
+        
+      }));
+
 };

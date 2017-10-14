@@ -17,7 +17,8 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" sizes="16x16">
 
     <!-- Bootstrap Core CSS -->
-    <link href="https://blackrockdigital.github.io/startbootstrap-landing-page/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="https://blackrockdigital.github.io/startbootstrap-landing-page/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -52,12 +53,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     
                     <li>
-                        <button ng-show=true class="btn btn-success">Login</button>
-                    </li>
-                    <li>
-                        <button ng-show=false class="btn btn-danger">Logout</button>
-                    </li>
-                    <li>
                         <a href="#about">About</a>
                     </li>
                     <li>
@@ -76,9 +71,12 @@
 
     <!-- Header -->
     <a name="about"></a>
+    
     <div class="intro-header">
         <div class="container">
-
+            
+            
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
@@ -111,6 +109,12 @@
 	<a  name="search"></a>
 	
     <div id="barListWrapper" ng-controller="myCtrl">
+        
+        
+        <button ng-click='myauth()' ng-disabled='loginvalue' class="btn btn-primary">Login</button>
+        <button ng-click='logout()' ng-show='logoutvalue' class="btn btn-danger">Logout</button>
+        
+        
         <div id = "searchbox">
             <form name= "myform"  ng-submit="send()">
                 
@@ -132,6 +136,7 @@
                     <div class="bar-details clearfix">
                         
                         <h3>{{bar.name}}</h3>
+                        <p>Going: {{count}}</p>
                         <p>Rating: {{bar.rating}}</p>
 						<p>Price Rate: {{bar.price}}</p>
                         <ul class="list-unstyled list-inline">
