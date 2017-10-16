@@ -2,8 +2,8 @@
 
 var bodyParser = require('body-parser');
 var path = process.cwd();
-//var user = require('../models/users.js');
-var list = require('../models/rsvplist.js');
+var User = require('../models/users.js');
+var List = require('../models/rsvplist.js');
 var http = require('http');
 var Yelp = require('yelp-v3');
 
@@ -24,7 +24,7 @@ module.exports=function(app, passport){
     
     app.post('/post', function(req,res){
         
-        console.log('success');
+        console.log('success! loaded all the bars.');
         
         var yelp = new Yelp({
             access_token: process.env.YELP_TOKEN,
@@ -46,6 +46,8 @@ module.exports=function(app, passport){
     app.post('/getlist', function(req,res){
         
        console.log('/getlist recieved');
+       
+       console.log(req.body);
        
        
     });
@@ -130,14 +132,10 @@ module.exports=function(app, passport){
 }
 
 
-// add passport.authenticationMiddleware(), renderProfile to add middleware.
-function authenticationMiddleware () {
-  return function (req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-    res.redirect('/')
-  }
+// test authentication
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/');
 }
 
 

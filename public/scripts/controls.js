@@ -85,7 +85,7 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
             
             method: 'POST',
             url: '/getlist',
-            data: $scope.awesomePlaces,
+            data: {'index': $scope.VarName.data.businesses[index].id},
             processData: true
         }).then(function(response){
             
