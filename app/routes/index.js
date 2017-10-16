@@ -91,7 +91,7 @@ module.exports=function(app, passport){
             
             console.log(req.user)
             //var receiveData = req.body.test
-            var data = {'site' : 'auth/twitter'};
+            var data = {'site' : 'auth/github'};
             console.log('Yeah!!');
             res.end(JSON.stringify(data));
         }
@@ -122,7 +122,7 @@ module.exports=function(app, passport){
         app.get('/auth/github', passport.authenticate('github'));
         
         app.get('/auth/github/callback',
-            passport.authenticate('github', { failureRedirect : '/' , failureFlash: 'bad login', successFlash: 'Welcome!'}),
+            passport.authenticate('github', { failureRedirect : '/'}),
             function(req,res){
                 res.redirect('/');
             });
@@ -130,16 +130,14 @@ module.exports=function(app, passport){
 }
 
 
-
-function checkAuthentication(req, res, next) {
-
-    if (req.isAuthenticated()){
-        return next();
+// add passport.authenticationMiddleware(), renderProfile to add middleware.
+function authenticationMiddleware () {
+  return function (req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
     }
-        
-    else{
-        res.redirect('/');
-    }
+    res.redirect('/')
+  }
 }
 
 

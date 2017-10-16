@@ -5,8 +5,9 @@ var Schema = mongoose.Schema;
 
 var Users = new Schema({
     
-    id: Number,
+    barid: Number,
     count: { type: Number, default: 0 },
+
 });
 
 module.exports = mongoose.model('Users', Users);
