@@ -24,7 +24,7 @@ module.exports = function(passport){
     },
     function(accessToken, refreshToken, profile, done){
         
-        console.log(profile.username)
+        //console.log(profile.username)
         
         List.findOne({username: profile.username}, function(err,user){
             
@@ -35,11 +35,11 @@ module.exports = function(passport){
                 /*
                 user.remove({}, function(err) { 
                    console.log('collection removed') 
-                });
-                */
+                });*/
+                
                 
                 console.log("Welcome "+profile.displayName+"!");
-                console.log(user);
+                //console.log(user);
                 done(null, user);
             }
             

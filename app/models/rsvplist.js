@@ -7,7 +7,7 @@ var Lists = new Schema({
     
     username: String,
     name: String,
-    mylist: [Number]
+    mylist: [String]
     
 });
 

@@ -13,6 +13,7 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
     
     $scope.rsvped = $localStorage.rsvpbars;
     
+    
     function show(storedPlaces){
         storedPlaces.forEach(function(index){
            
@@ -20,6 +21,7 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
             $scope.VarName.data.businesses[index].show = true;
         });
     }
+    
     
     $scope.preview = function(){
         alert("Submitted!");
@@ -74,8 +76,8 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
     $scope.rsvp = function(index){
         
         
-       // $scope.VarName.data.businesses[index].rsvping = true;
-        //$scope.VarName.data.businesses[index].show = true;
+        $scope.VarName.data.businesses[index].rsvping = true;
+        $scope.VarName.data.businesses[index].show = true;
         
         alert("Task Id is "+$scope.VarName.data.businesses[index].id);
     
@@ -92,29 +94,39 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
             $scope.places = response.data;
             
         }).catch(function(err){
-            $scope.bars = err.statusText;
             console.log('List not recieved');
         });
         
-        show($scope.places);
+        //show($scope.places);
     } 
     
     $scope.cancel = function(index){
         
         //awesomePlaces.remove(index);
         
-        console.log(awesomePlaces)
-        
         $scope.VarName.data.businesses[index].rsvping = false;
         $scope.VarName.data.businesses[index].show = false;
+        
+        var req = $http({
+            
+            method: 'POST',
+            url: '/editlist',
+            data: {'index': $scope.VarName.data.businesses[index].id},
+            processData: true
+        }).then(function(response){
+            
+            $scope.places = response.data;
+        }).catch(function(err){
+            console.log("List not recieved!");
+        })
         
        // $sessionStorage.myrsvp = $scope.VarName.data.businesses[index].rsvping;
         //$sessionStorage.myshow = $scope.VarName.data.businesses[index].show;
     }
     
+    
     $scope.VarName = angular.fromJson($window.sessionStorage['storage']);
     
     $scope.myvalues = angular.fromJson($window.sessionStorage['mystorage']);
-    
     
 });

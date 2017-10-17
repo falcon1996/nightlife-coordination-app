@@ -43,62 +43,39 @@ module.exports=function(app, passport){
     });
     
     
-    app.post('/getlist', function(req,res){
+    app.post('/getlist',ensureAuthenticated, function(req,res){
         
+       console.log(req.body);
        console.log('/getlist recieved');
        
-       console.log(req.body);
+       // user object in req is created by passport.js for every request in express.js
+       //console.log(req.user);
        
+       var loggedinUsername = req.user.username;
        
+       List.findOneAndUpdate({username: loggedinUsername}, {$push:{mylist: req.body.index}}, {new: true}, function(err, doc){
+           
+           if(err) console.log("Error in updating RSVP list!");
+           
+           else console.log(doc);
+       });
     });
     
-    app.post('/mypost',function(req, res){
+    app.post('/editlist',ensureAuthenticated, function(req,res){
         
-        if(req.user != undefined){
-            
-            console.log('Harry Potter!')
-            
-                
-            /*var barcount;
-            
-            user.find({barid: req.body.mybar}, function(err, docs){
-                
-                console.log(docs);
-                barcount = docs.length;
-            });
-            
-            
-            user.find( { $and:[{ip: req.params.myip}, {barid: req.body.mybar}] }, function(err, docs){
-                
-                if(err) console.log('Error!');
-                
-                else if(docs.length == 0){
-                    
-                    new user({
-                        ip : req.headers['x-forwarded-for'],
-                        barid: req.body.mybar,
-                        going: true,
-                        count: 1 + barcount
-                        
-                    });
-                }
-                
-            });
-            
-            var data = {mystatus: barcount+1}
-            res.end(JSON.stringify(data));*/
-        }
+        console.log(req.body);
+        console.log("/editlist recieved!");
+        var loggedinUser = req.user.username;
         
-        else{
+        List.findOneAndUpdate({username: loggedinUser}, {$pull:{mylist: req.body.index}}, {new: true}, function(err, doc){
             
-            console.log(req.user)
-            //var receiveData = req.body.test
-            var data = {'site' : 'auth/github'};
-            console.log('Yeah!!');
-            res.end(JSON.stringify(data));
-        }
-        
-    })
+            if(err) console.log("Error in editing RSVP list!");
+            
+            else console.log(doc);
+        });
+    });
+    
+    
     
     
     app.route('/getmap')
