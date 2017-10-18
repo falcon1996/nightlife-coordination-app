@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var Users = new Schema({
     
-    barid: Number,
+    barid: String,
     count: { type: Number, default: 0 },
 
 });

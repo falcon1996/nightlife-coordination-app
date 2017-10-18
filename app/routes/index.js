@@ -51,17 +51,56 @@ module.exports=function(app, passport){
        // user object in req is created by passport.js for every request in express.js
        //console.log(req.user);
        
+       // Updating Personal rsvp List
+       
        var loggedinUsername = req.user.username;
        
        List.findOneAndUpdate({username: loggedinUsername}, {$push:{mylist: req.body.index}}, {new: true}, function(err, doc){
            
            if(err) console.log("Error in updating RSVP list!");
            
-           else console.log(doc);
+           else{
+               console.log(doc);
+               res.end(JSON.stringify(doc));
+           }
        });
+       
+       
+       // Updating Bar's rsvp list
+       
+       User.findOne({barid: req.body.index}, function(err,bar){
+           if(err) console.log("Error!");
+           
+           else if(!err && !bar){
+               
+               bar = new User({
+                   barid: req.body.index,
+                   count: 1
+               });
+               bar.save(function(err){
+                   if(err) console.log(err);
+                   
+                   else{
+                       console.log("Saving Bar..");
+                   }
+               })
+           }
+           
+           else{
+               
+               User.update({barid: req.body.index}, {$inc: {count: 1}}, function(err, bar){
+                   if(err) console.log("Error in editing Bar list!");
+                   
+                   else console.log(bar);
+               })
+           }
+       })
+       
     });
     
     app.post('/editlist',ensureAuthenticated, function(req,res){
+        
+        // Updating Personal rsvp List
         
         console.log(req.body);
         console.log("/editlist recieved!");
@@ -71,8 +110,25 @@ module.exports=function(app, passport){
             
             if(err) console.log("Error in editing RSVP list!");
             
-            else console.log(doc);
+            else{
+                console.log(doc);
+                res.end(JSON.stringify(doc));
+            }
         });
+        
+        
+        
+        // Updating Bar's rsvp list
+        
+        User.findOneAndUpdate({barid: req.body.index}, {$inc: {count: -1}}, {new: true}, function(err, bar){
+            
+            if(err) console.log("Error in editing Bar list!");
+            
+            else{
+                console.log(bar);
+            }
+        });
+        
     });
     
     

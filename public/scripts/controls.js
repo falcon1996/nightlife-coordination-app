@@ -1,9 +1,7 @@
 var app = angular.module('myApp', ['ngStorage']);
 
 app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localStorage,$location) {
-    
-    var awesomePlaces = [0];
-    
+    var vm = this;
     $scope.data = {};
     
     $localStorage.showDiv;
@@ -11,14 +9,19 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
     $scope.loginvalue = $localStorage.showDiv;
     $scope.logoutvalue = $localStorage.shownextDiv;
     
-    $scope.rsvped = $localStorage.rsvpbars;
+    $scope.places = $localStorage.rsvpbars;
     
     
     function show(storedPlaces){
         storedPlaces.forEach(function(index){
-           
-            $scope.VarName.data.businesses[index].rsvping = true;
-            $scope.VarName.data.businesses[index].show = true;
+            
+            for(var i=0; i<21; i++){
+                
+                if($scope.VarName.data.businesses[i].id == index){
+                    $scope.VarName.data.businesses[index].rsvping = true;
+                    $scope.VarName.data.businesses[index].show = true;
+                }
+            }
         });
     }
     
@@ -75,13 +78,10 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
     
     $scope.rsvp = function(index){
         
-        
         $scope.VarName.data.businesses[index].rsvping = true;
         $scope.VarName.data.businesses[index].show = true;
         
         alert("Task Id is "+$scope.VarName.data.businesses[index].id);
-    
-        awesomePlaces.push(index);
         
         var req = $http({
             
@@ -91,18 +91,18 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
             processData: true
         }).then(function(response){
             
-            $scope.places = response.data;
+            $scope.places = JSON.stringify(response.data.mylist);   //gets data back from /getlist
+            alert   ("Your RSVPed bars: "+$scope.places);
+            $localStorage.rsvpbars = $scope.places;
             
         }).catch(function(err){
             console.log('List not recieved');
         });
         
-        //show($scope.places);
+        show($scope.places);
     } 
     
     $scope.cancel = function(index){
-        
-        //awesomePlaces.remove(index);
         
         $scope.VarName.data.businesses[index].rsvping = false;
         $scope.VarName.data.businesses[index].show = false;
@@ -114,14 +114,16 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
             data: {'index': $scope.VarName.data.businesses[index].id},
             processData: true
         }).then(function(response){
+    
+            $scope.places = JSON.stringify(response.data.mylist);
+            alert("control.js recieved "+$scope.places)
+            $localStorage.rsvpbars = $scope.places;
             
-            $scope.places = response.data;
         }).catch(function(err){
             console.log("List not recieved!");
         })
         
-       // $sessionStorage.myrsvp = $scope.VarName.data.businesses[index].rsvping;
-        //$sessionStorage.myshow = $scope.VarName.data.businesses[index].show;
+       show($scope.places);
     }
     
     
