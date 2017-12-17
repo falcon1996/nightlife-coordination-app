@@ -12,14 +12,15 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
     $scope.places = $localStorage.rsvpbars;
     
     
+    
     function show(storedPlaces){
         storedPlaces.forEach(function(index){
             
             for(var i=0; i<21; i++){
                 
                 if($scope.VarName.data.businesses[i].id == index){
-                    $scope.VarName.data.businesses[index].rsvping = true;
-                    $scope.VarName.data.businesses[index].show = true;
+                    $scope.VarName.data.businesses[i].rsvping = true;
+                    $scope.VarName.data.businesses[i].show = true;
                 }
             }
         });
@@ -81,7 +82,7 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
         $scope.VarName.data.businesses[index].rsvping = true;
         $scope.VarName.data.businesses[index].show = true;
         
-        alert("Task Id is "+$scope.VarName.data.businesses[index].id);
+        alert("Bar Id is: "+$scope.VarName.data.businesses[index].id);
         
         var req = $http({
             
@@ -92,8 +93,10 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
         }).then(function(response){
             
             $scope.places = JSON.stringify(response.data.mylist);   //gets data back from /getlist
-            alert   ("Your RSVPed bars: "+$scope.places);
             $localStorage.rsvpbars = $scope.places;
+            if($scope.places) alert("Your RSVPed bars: "+$scope.places);
+            
+            else alert("Please Login to RSVP!");
             
         }).catch(function(err){
             console.log('List not recieved');
@@ -116,9 +119,11 @@ app.controller('myCtrl', function($scope,$http,$sessionStorage,$window,$localSto
         }).then(function(response){
     
             $scope.places = JSON.stringify(response.data.mylist);
-            alert("control.js recieved "+$scope.places)
             $localStorage.rsvpbars = $scope.places;
+            if($scope.places) alert("Your RSVPed bars: "+$scope.places)
             
+            else alert("Please Login to RSVP!");
+
         }).catch(function(err){
             console.log("List not recieved!");
         })

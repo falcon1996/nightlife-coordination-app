@@ -88,7 +88,7 @@ module.exports=function(app, passport){
            
            else{
                
-               User.update({barid: req.body.index}, {$inc: {count: 1}}, function(err, bar){
+               User.update({barid: req.body.index}, {$inc: {count: 1}}, {new: true}, function(err, bar){
                    if(err) console.log("Error in editing Bar list!");
                    
                    else console.log(bar);
